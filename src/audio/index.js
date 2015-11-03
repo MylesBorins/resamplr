@@ -3,6 +3,7 @@ require('./context');
 var async = require('async');
 var loadUrl = require('./loadUrl');
 var playBuffer = require('./playBuffer');
+var resample = require('./resample');
 
 function original() {
   async.waterfall([
@@ -11,6 +12,15 @@ function original() {
   ]);
 }
 
+function downsampled() {
+  async.waterfall([
+    loadUrl.bind(null, './audio/SeinfeldInHd-GeorgesAnsweringMachine-LongVersion.wav'),
+    resample,
+    playBuffer
+  ]);
+}
+
 module.exports = {
-  original: original
+  original: original,
+  downsampled: downsampled
 };
