@@ -1,18 +1,16 @@
-var async = require('async');
-
 require('./context');
+
+var async = require('async');
 var loadUrl = require('./loadUrl');
 var playBuffer = require('./playBuffer');
-// Start off by initializing a new context.
 
-
-function init(next) {
-  var george = './audio/SeinfeldInHd-GeorgesAnsweringMachine-LongVersion.wav';
-  next(null, george);
+function original() {
+  async.waterfall([
+    loadUrl.bind(null, './audio/SeinfeldInHd-GeorgesAnsweringMachine-LongVersion.wav'),
+    playBuffer
+  ]);
 }
 
-async.waterfall([
-  init,
-  loadUrl,
-  playBuffer
-]);
+module.exports = {
+  original: original
+};

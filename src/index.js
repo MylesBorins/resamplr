@@ -1,7 +1,4 @@
-require('./audio');
+var audio = require('./audio');
 
-var george = require('./george');
-
-var content = document.getElementById('content');
-
-content.innerHTML = `${george()}`;
+var original = document.getElementById('original');
+original.onclick = audio.original;
